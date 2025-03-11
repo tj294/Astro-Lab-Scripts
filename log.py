@@ -200,8 +200,8 @@ def main(basedir):
             )
     log.close()
     print("Written log to %s" % logfullname)
-
-    rename_obs.list_wcs_targets(log_path)
+    wcs_dir = glob.glob(basedir + "/*/")[0]
+    rename_obs.list_wcs_targets(wcs_dir)
 
 
 if __name__ == "__main__":
