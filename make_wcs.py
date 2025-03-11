@@ -134,7 +134,6 @@ def solve_wcs(source_image_name, target):
         hdu = fits.PrimaryHDU(data=source_image_data, header=solved_image_head)
         hdu.header["WCSSolve"] = True  # Add a new line of info in the HEADER.
         hdu.writeto(solved_image_name, overwrite=True)
-        os.remove(source_image_name)
 
 
 if __name__ == "__main__":
