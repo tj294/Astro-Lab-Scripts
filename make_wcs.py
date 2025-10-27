@@ -101,6 +101,7 @@ def solve_wcs(source_image_name, target):
                             submission_id, solve_timeout=120
                         )
             except TimeoutError as e:
+                print(f"\tsubmission {n_submissions} timed out. Resubmitting.")
                 submission_id = e.args[1]
                 n_submissions += 1
             except NoDetectionsWarning:
@@ -118,10 +119,11 @@ def solve_wcs(source_image_name, target):
             else:
                 # got a result, so terminate
                 try_again = False
-                print("        Finished {}".format(source_image_name))
 
-    if try_again and not wcs_header:
-        print("            Gave up on {}".format(source_image_name))
+                if not wcs_header:
+                    print("\tWCS solution not found.")
+                else:
+                    print(f"\tFinished {source_image_name}")
 
     if wcs_header:
         solved_image_name = source_image_name.replace(".fits", "_wcs.fits")
@@ -134,6 +136,7 @@ def solve_wcs(source_image_name, target):
         hdu = fits.PrimaryHDU(data=source_image_data, header=solved_image_head)
         hdu.header["WCSSolve"] = True  # Add a new line of info in the HEADER.
         hdu.writeto(solved_image_name, overwrite=True)
+        print(f"\t\tWrote to {solved_image_name}")
 
 
 if __name__ == "__main__":
