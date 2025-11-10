@@ -64,8 +64,8 @@ def main(basedir):
 
     misc_flag = False
 
-    log_path = basedir
-    logname = os.path.basename(basedir) + ".log"
+    log_path = os.path.normpath(basedir)
+    logname = os.path.basename(log_path) + ".log"
     logfullname = log_path + f"/{logname}"
     print(f"Creating log at {logfullname}")
     log = open(logfullname, "w")
