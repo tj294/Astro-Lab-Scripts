@@ -105,7 +105,7 @@ def solve_wcs(source_image_name, target):
                 submission_id = e.args[1]
                 n_submissions += 1
             except NoDetectionsWarning:
-                print("                    Failed to fit {}".format(source_image_name))
+                print("                    No Detections in {}".format(source_image_name))
                 try_again = False
                 # NoDetectionsWarning doesn't seem to trigger, so catching all
                 # exceptions below. This should be fixed at some point.
